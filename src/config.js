@@ -1,7 +1,8 @@
 const dotenv = require('dotenv')
 const result = dotenv.config()
 
-if (result.error) {
+
+if (result.error && !process.env.POKE_REMOTE_API) {
     throw result.error
 }
 
