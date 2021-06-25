@@ -7,12 +7,15 @@ const app = express()
 app.get('/pokemon', (req, res) => {
     const id = Number(req.query.id)
     repository.getPokemon(id)
-        .then(p => res.json(p))
+        .then(p => {
+            p.image = `/image?id=${id}`
+            res.json(p)
+        })
         .catch(err => res.status(err.response.status)
             .end(err.response.status + ' - ' + err.response.statusText))
 })
 
-app.get('/image', (req, res) => {
+app.get('/pokemon/image', (req, res) => {
     const id = Number(req.query.id)
     repository.getPokemonImage(id)
         .then(filePath => {
