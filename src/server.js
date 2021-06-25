@@ -25,8 +25,9 @@ app.get('/pokemon/image', (req, res) => {
                 res.status(404).end('Image Not Found.')
         })
         .catch(err => {
+            console.log(err)
             if ((err.response || {}).status === 404)
-                res.status(404).end('Image Not Found.')
+                return res.status(404).end('Image Not Found.')
             res.status(400).end('ERRO')
         })
 })
